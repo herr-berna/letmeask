@@ -14,12 +14,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>        
-          <AuthContextProvider>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/rooms/new" element={<NewRoom/>}/>          
-          </AuthContextProvider>
-        </Routes>
+        <AuthContextProvider>
+          <Routes>        
+              <Route path="/" element={<Home/>}/>
+              <Route path="/rooms/new" element={<NewRoom/>}/>          
+          </Routes>
+        </AuthContextProvider>
       </BrowserRouter>
     </div>
   );
