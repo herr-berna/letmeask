@@ -9,30 +9,42 @@ import { NewRoom } from "./pages/NewRoom";
 
 import { auth, firebase } from './services/firebase'
 
+type User = {
+  id: string;
+  name: string;
+  avatar: string;
+};
+
+type AuthContextType = {
+  user: User | undefined;
+  signInWithGoogle: () => Promise<void>;
+}
+
 // O contexto forma um componente
-export const AuthContext = createContext({} as any); 
+export const AuthContext = createContext({} as AuthContextType); 
 
 function App() {
   //context permite pegar um state e deixar ele presente e manipulável across different components
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<User>();
 
-  function signInWithGoogle() {
+  async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider).then(res => {
-            if (res.user) {
-              const { displayName, photoURL, uid } = res.user
-              if (!displayName || !photoURL) {
-                throw new Error('Informações faltando da conta do Google.')
-              }
 
-              setUser({
-                id: uid,
-                name: displayName,
-                avatar: photoURL
-              })
-            }           
+    const res = await auth.signInWithPopup(provider)
+
+      if (res.user) {
+        const { displayName, photoURL, uid } = res.user
+        if (!displayName || !photoURL) {
+          throw new Error('Informações faltando da conta do Google.')
+        }
+
+        setUser({
+          id: uid,
+          name: displayName,
+          avatar: photoURL
         })
-  }
+      }
+}
 
   return (
     <div className="App">
@@ -49,7 +61,5 @@ function App() {
     </div>
   );
 }
-
-// 1:06:00
 
 export default App;
