@@ -11,17 +11,14 @@ import { Button } from "../components/Button";
 
 // Importando CSS
 import '../styles/auth.scss';
-import { useContext } from "react";
-import { AuthContext } from "../App";
-// webpack é utilizado pelo create-react-app
-// cria bundle.js a partir das dependências
+import { useAuth } from "../hooks/useAuth";
 
 export function Home() {
 
     const navigate = useNavigate();
 
     // Trazendo context
-    const { user, signInWithGoogle } = useContext(AuthContext)
+    const { user, signInWithGoogle } = useAuth();
 
     async function handleCreateRoom() {
         if (!user) {
