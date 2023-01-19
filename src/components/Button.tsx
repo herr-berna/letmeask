@@ -1,3 +1,4 @@
+// importação dos atributos do botão do HTML -> tipagem importada do react
 import { ButtonHTMLAttributes } from "react"
 import '../styles/button.scss';
 

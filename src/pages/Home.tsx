@@ -5,9 +5,8 @@ import illustrationImg from "../assets/images/illustration.svg";
 import logoImg from "../assets/images/logo.svg";
 import googleIconImg from "../assets/images/google-icon.svg";
 
-// Importando 
+// Importando componente
 import { Button } from "../components/Button";
-
 
 // Importando CSS
 import '../styles/auth.scss';
@@ -24,7 +23,6 @@ export function Home() {
         if (!user) {
             await signInWithGoogle();
         }
-
         navigate("/rooms/new");
     }
 
@@ -39,7 +37,7 @@ export function Home() {
                 <div className='main-content'>
                     <img src={logoImg} alt="Letmeask" />
                     <button onClick={handleCreateRoom} className='create-room' >
-                        <img src={googleIconImg} alt="Logo da Google" /> Entre com sua conta Google
+                        <img src={googleIconImg} alt="Logo da Google" /> Crie sua sala com o Google
                     </button>
                     <div className='separator'>ou entre em uma sala</div>
                     <form>
