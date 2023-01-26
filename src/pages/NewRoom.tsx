@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { database } from '../services/firebase';
 
 
@@ -10,23 +10,33 @@ import googleIconImg from '../assets/images/google-icon.svg';
 import { Button } from '../components/Button';
 
 import '../styles/auth.scss'
+import { useAuth } from '../hooks/useAuth';
 //import { useAuth } from '../hooks/useAuth';
 
 // trabalhando no acesso ao banco de dados
 // 22:11
 
 export function NewRoom() {
-    //const { user } = useAuth();
-
+    const { user } = useAuth();
     const [newRoom, setNewRoom] = useState('');
+    const navigate = useNavigate()
 
     async function handleCreateRoom(event: FormEvent) {
+
+
         event.preventDefault();
         if (newRoom.trim() === '') {
             return;
         }
 
         const roomRef = database.ref('rooms');
+
+        const firebaseRoom = await roomRef.push({
+            title: newRoom,
+            authorId: user?.id
+        })
+
+        navigate(`rooms/${firebaseRoom.key}`)
     }
 
     return (
@@ -45,7 +55,6 @@ export function NewRoom() {
                         <input
                             type="text"
                             placeholder="Nome da sala"
-                            // e.target.value
                             onChange={e => setNewRoom(e.target.value)}
                             value={newRoom}
                         />
@@ -57,5 +66,3 @@ export function NewRoom() {
         </div>
     )
 }
-
-// 43:13
