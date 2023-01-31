@@ -11,10 +11,6 @@ import { Button } from '../components/Button';
 
 import '../styles/auth.scss'
 import { useAuth } from '../hooks/useAuth';
-//import { useAuth } from '../hooks/useAuth';
-
-// trabalhando no acesso ao banco de dados
-// 22:11
 
 export function NewRoom() {
     const { user } = useAuth();

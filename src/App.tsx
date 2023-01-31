@@ -7,7 +7,7 @@ import { NewRoom } from "./pages/NewRoom";
 
 import { AuthContextProvider } from './contexts/AuthContext';
 
-
+// 33:50
 
 function App() {
   //context permite pegar um state e deixar ele presente e manipulável across different components
